@@ -1,0 +1,321 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  contactProperties [
+    ContactProperties {
+      material2 "robot"
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.5845988013736317 0.607010259228321 -0.538314765378101 2.122212556543067
+  position -4.924372405554469 -1.375956849606169 28.961824849654704
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0.24 0
+  floorSize 5 5
+  floorAppearance NULL
+  wallHeight 1
+}
+Robot {
+  translation 0.6462543068393363 0.5832901251023099 0.20290323997569729
+  rotation -0.020000769802297563 -0.07082371271431218 0.9972883088278314 2.472698301525259
+  children [
+    Display {
+    }
+    Lidar {
+      translation 0 0 0.25
+      rotation 0 0 1 -1.57
+      horizontalResolution 128
+      fieldOfView 6.28
+      numberOfLayers 1
+      maxRange 0.75
+    }
+    DEF robot_camera Camera {
+      translation 0 -0.14 0
+      rotation 0 0 -1 1.309
+      name "robot_camera"
+    }
+    DEF eye_1 Solid {
+      translation 0.09 -0.15 0.0900002
+      rotation -1 0 0 0.523598
+      children [
+        DEF eye_shape Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.01
+            radius 0.04
+          }
+        }
+      ]
+      name "solid(2)"
+    }
+    DEF eye_2 Solid {
+      translation -0.08 -0.14 0.0897767
+      rotation 1 0 0 -1.57
+      children [
+        USE eye_shape
+      ]
+      name "solid(3)"
+    }
+    DEF body Pose {
+      children [
+        DEF body_shape Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.4
+            radius 0.15
+          }
+        }
+      ]
+    }
+    DEF wheel_1 HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1438.5846126717101
+        anchor 0.17 0 -0.09
+      }
+      device [
+        DEF motor1 RotationalMotor {
+          name "motor1"
+        }
+        PositionSensor {
+          name "ps_1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.17 0.023906389187340168 -0.10812414290451897
+        rotation 0.1328174939373882 -0.9827566063202312 0.1286427846330067 4.69250293202885
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.05
+              radius 0.1
+            }
+          }
+        ]
+        boundingObject USE wheel
+        physics DEF wheel_physics Physics {
+        }
+        linearVelocity 0.35110041752793925 0.4365094642099786 0.00274780241465504
+        angularVelocity -4.3703438535631705 3.5130825977642326 0.00554591632436653
+      }
+    }
+    DEF wheel_2 HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1438.57314552357
+        anchor -0.17 0 -0.09
+      }
+      device [
+        DEF motor2 RotationalMotor {
+          name "motor2"
+        }
+        PositionSensor {
+          name "ps_2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.17 0.025883106072465797 -0.10516788779103682
+        rotation 0.07438870435988838 -0.9947294693690261 0.07056630522050399 4.707335812216289
+        children [
+          USE wheel
+        ]
+        name "solid(1)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+        linearVelocity 0.35144212916701517 0.43764698611203223 0.003893368059344187
+        angularVelocity -4.382159280158284 3.5219757412966457 0.005289717832528918
+      }
+    }
+  ]
+  contactMaterial "robot"
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "slam_viz2"
+  controllerArgs [
+    ""
+  ]
+  linearVelocity 0.47882766890480044 0.5914108654957173 -0.09766550315397333
+  angularVelocity -0.5850460621056516 0.516962525507319 -0.0298688502171015
+}
+DEF ball1 Solid {
+  translation 1.9160389306951204 -1.8960753733975972 0.14740219915653824
+  rotation 0.6539075003808642 -0.592908831672592 -0.4699618051185564 3.0316702490991454
+  children [
+    DEF ball Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.2
+      }
+    }
+  ]
+  name "ball1"
+  boundingObject USE ball
+  physics Physics {
+  }
+  linearVelocity 0 0 6.603715920463029e-17
+}
+DEF wall2 Solid {
+  translation 0 1.48 0.25
+  children [
+    Solid {
+      translation -0.8999943615654357 -2.360034413032465 -0.06584064203636275
+      rotation -5.2885284260043116e-05 -0.00025129115024438475 0.9999999670279517 0.2615925509786122
+      children [
+        DEF wall2 Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            metalness 0
+          }
+          geometry Box {
+            size 2 0.1 0.7
+          }
+        }
+      ]
+      boundingObject USE wall2
+      physics Physics {
+      }
+      linearVelocity 1.1035683781691923e-10 -3.305014431944097e-11 -8.137982509963755e-06
+      angularVelocity -5.548337952406307e-13 1.1937337465052105e-12 1.0845040417775793e-11
+    }
+  ]
+  name "solid(2)"
+  locked TRUE
+}
+DEF wall1 Solid {
+  translation 1.3754113925193043 0.7433201707145559 0.39957774735110996
+  rotation -0.06391259596125405 0.003225658317379268 -0.9979502869411447 0.10164547575433988
+  children [
+    DEF wall_shape Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 1
+        metalness 0
+      }
+      geometry Box {
+        size 2.25 0.1 0.8
+      }
+    }
+  ]
+  name "wall1"
+  boundingObject USE wall_shape
+  physics Physics {
+    mass 1
+  }
+  locked TRUE
+  linearVelocity 0.013809171991416801 0.2677978376517485 0.00015847744038256922
+  angularVelocity 0.0017676748073954564 -0.00016130967139728797 -0.2387874921736795
+}
+DEF goal Solid {
+  translation 1.8526609619346258e-07 1.8599999059076482 0.31124121107665853
+  rotation -3.0741044676642424e-11 -1.1792075199075317e-10 -1 4.457289049873147e-07
+  children [
+    DEF Cylinder Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.8
+        radius 0.3
+      }
+    }
+  ]
+  boundingObject USE Cylinder
+  physics Physics {
+  }
+  linearVelocity 2.233646442787107e-17 1.594529971003123e-17 9.00670216811229e-16
+  angularVelocity -3.1737940205821175e-17 -1.8488927466117464e-32 7.215300746302035e-18
+}
+DEF ball2 Solid {
+  translation -0.30068244181600406 2.2644206040782207 0.14740219915653824
+  rotation -0.7743680929739138 0.4811016040877475 -0.4109687374097208 1.1675074691904395
+  children [
+    USE ball
+  ]
+  name "solid(1)"
+  boundingObject USE ball
+  physics Physics {
+  }
+  linearVelocity 0 0 6.603715920463029e-17
+}
+DEF moving_ball Robot {
+  translation -3.8794265315524483 -0.5669873628757497 0.24598134225095214
+  rotation 0.9194465867888413 -0.16869903599492234 -0.35518813225772883 2.682808479584431
+  children [
+    HingeJoint {
+      device [
+        DEF speed_motor RotationalMotor {
+          name "speed_motor"
+          maxVelocity 20
+          maxTorque 100
+        }
+      ]
+      endPoint Solid {
+        translation -0.00010593815861131816 9.888461641656582e-05 -0.00012331655116207187
+        rotation -0.9999988752145311 -0.000997935736686266 -0.0011196847495691144 2.842995138299238
+        boundingObject Sphere {
+          radius 0.25
+        }
+        physics Physics {
+          density 2000
+          mass 2.5
+        }
+        linearVelocity -2.9346981922784005e-06 7.356100674217366e-07 -6.9674607867511334e-09
+        angularVelocity -2.9414600780560045e-06 -1.173450541079119e-05 8.837447214768233e-11
+      }
+    }
+    DEF dynamic_robot Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+        roughness 1
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.25
+        subdivision 5
+      }
+    }
+  ]
+  name "moving_ball"
+  boundingObject USE dynamic_robot
+  physics Physics {
+    density 2000
+    mass 2.5
+  }
+  controller "<none>"
+  linearVelocity -2.932541805381885e-06 7.350472718134331e-07 3.875151834650014e-10
+  angularVelocity -2.9412164300220093e-06 -1.1734642493460562e-05 -9.999919875128837e-11
+}
+E-puck {
+  hidden position_0_0 3.05754441331075e-08
+  hidden position_0_1 3.057541645979742e-08
+  hidden rotation_1 0 1 0 2.9802322387695313e-08
+  hidden rotation_2 0 1 0 2.9802322387695313e-08
+  translation 3.3963849660360963e-15 1.4599999999999993 -6.396199560316715e-05
+  rotation 0.9999805492025076 0.0062370839861076955 -3.7870710580342025e-08 7.334500272792038e-09
+  controller "graphslam_epuck"
+  controllerArgs [
+    ""
+  ]
+}
